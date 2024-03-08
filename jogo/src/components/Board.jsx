@@ -20,11 +20,16 @@ const Board = () => {
     const newSquares = squares.slice();
 
     // Preenche o quadrado com "X" ou "O" com base na vez do jogador
-    newSquares[i] = xIsNext ? "X" : "O";
+    newSquares[i] = xIsNext ? "🥫" : "🍟";
 
     // Atualiza o estado dos quadrados e passa a vez para o próximo jogador
     setSquares(newSquares);
     setXIsNext(!xIsNext);
+
+    // Trigger an alert when there is a winner
+    if (winner) {
+      alert(`Parabéns ao grande vencedor: ${winner}`);
+    }
   };
 
   // Função para reiniciar o jogo
@@ -41,10 +46,10 @@ const Board = () => {
         Status:{" "}
         {winner ? (
           // Exibe o vencedor se houver um
-          <p className="winner">O vencedor é: {winner}!</p>
+          <p className="winner">Parabéns ao grande vencedor: {winner}</p>
         ) : (
           // Exibe o próximo jogador se não houver vencedor
-          `Próximo a jogar: ${xIsNext ? "X" : "O"}`
+          `Próximo a jogar: ${xIsNext ? "🥫" : "🍟"}`
         )}
       </div>
       {/* Renderização das linhas do tabuleiro com componentes Square */}
@@ -65,7 +70,7 @@ const Board = () => {
       </div>
       {/* Botão para reiniciar o jogo */}
       <button className="reset-button" onClick={restartGame}>
-        Reiniciar Jogo
+        Jogar Novamente
       </button>
     </div>
   );
@@ -95,6 +100,7 @@ const calculateWinner = (squares) => {
   // Retorna null se não houver um vencedor
   return null;
 };
+
 
 // Exporta o componente Board como padrão
 export default Board;
